@@ -1,4 +1,4 @@
-# Ciphers-Java-
+# Ciphers
 
 This is a tool written in Java that encrypts or decrypts text using one of four ciphers: [caesar] (https://en.wikipedia.org/wiki/Caesar_cipher), 
 [atbash] (https://en.wikipedia.org/wiki/Atbash), [affine] (https://en.wikipedia.org/wiki/Affine_cipher), and [vigenère] 
