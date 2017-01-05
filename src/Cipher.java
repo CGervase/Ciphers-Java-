@@ -85,7 +85,7 @@ public class Cipher {
   //affine cipher
   public static void affine(char[] letters, int mode) {
     System.out.println("Please enter the multiplicative key to be used:");
-    int key = valInt(Integer.MIN_VALUE, Integer.MAX_VALUE);   //multiplicative key
+    int key = valRelPrime(26);   //multiplicative key
     System.out.println("Please enter the shift to be used (right for encr, left for decr):");
     int shift = valInt(Integer.MIN_VALUE, Integer.MAX_VALUE); //magnitude of shift 
     int c;
@@ -130,6 +130,42 @@ public class Cipher {
     
     String text = new String(letters);
     System.out.println("Result: " + text);
+  }
+  
+  //greatest common divisor, using Euclid's algorithm
+  public static int gcd(int x, int y) {
+    int z;
+    
+    while (y != 0) {
+      z = x;
+      x = y;
+      y = z % y + y % y;
+    }
+    
+    return x;
+  }
+  
+  //ensures key is coprime to 26
+  public static int valRelPrime (int b) {
+    Scanner input = new Scanner(System.in);
+    boolean check = true;   //boolean for try/catch loop
+    int a = -1;             //initialized with placeholder
+    
+    do {
+      try {
+        a = valInt(Integer.MIN_VALUE, Integer.MAX_VALUE); //validates integer
+        if (gcd(a, b) != 1)       //if key is not coprime to 26
+          throw new NumberFormatException("Input is not coprime with " + b + ".");
+        else
+          check = false;          //number is in range, exit loop
+      }
+      catch (Exception e) {
+        System.out.println("Please choose an integer that is coprime with " + b + ".");
+        System.out.print("");
+      }
+    } while (check);
+    
+    return a;
   }
   
   //modular inverse algorithm
